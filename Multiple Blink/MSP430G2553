@@ -23,11 +23,11 @@ void main(void)
 
 {
 
-int i,j;
+int i,j; // initialization of variables which are responsible for the delay
 
 WDTCTL = WDTPW + WDTHOLD;
 
-P1DIR |= (LED1|LED2);
+P1DIR |= (LED1|LED2); // Since on the MSP430G2553, LED1 and LED2 are both within port 1, both can be enabled as outputs within the same line
 
 i=j=0;
 
