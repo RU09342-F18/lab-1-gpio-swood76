@@ -2,7 +2,10 @@
 
 
 
-// Blink time constants
+// Blink time constants                                 //define counter1 (CTR1) a constant value significantly less than counter2 (CTR2)
+                                                        // for distinct delay between the red and green LEDs; creates distinct blink,
+                                                        // red LED blinks signficiantly faster
+
 
 #define CTR1 3000
 
