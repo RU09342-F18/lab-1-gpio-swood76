@@ -2,7 +2,8 @@
 
 
 #define CTR1 3000                                       //define counter1 (CTR1) a constant value significantly less than counter2 (CTR2)
-                                                        // for distinct delay between the red and green LEDs; creates distinct blink
+                                                        // for distinct delay between the red and green LEDs; creates distinct blink,
+                                                        // red LED blinks signficiantly faster
 
 #define CTR2 30000
 
