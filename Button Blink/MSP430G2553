@@ -7,7 +7,7 @@
 #define RED_LED BIT0   // Desired LED1 to be used is listed as P1.0; and is of bit0 within the eight bit register port;
                           //defined button as bit0 ofPort 1.0
 #define GREEN_LED BIT6  // Desired LED2 to be used is listed as P1.6; and is of bit6 within the eight bit register port;
-                          //defined button as bit6 ofPort 1.
+                          //defined button as bit6 of Port 1
 
 void main (void) {
 
@@ -29,12 +29,15 @@ P1REN |= BUTTON; // Want pull-up resistor to be enabled high since for ports req
 // begin infinite loop
 while (TRUE) {
 
-// Since button is low and not pressed, the AND operation results in the 
+// conditional if statement checks that if the button is pressed then the delayed blinking green led is turned off and the red LED is toggled
 if (P1IN & BUTTON) {
 P1OUT &= ~GREEN_LED;
 _delay_cycles(220000);// Green off
 P1OUT ^= RED_LED;   // Red on
-} else {
+} 
+// To accomondate for the button not being the pressed, the RED led is held in a constant low state, and the green LED is delayed by
+// an equivalent cycle of 220000
+else {
 P1OUT &= ~RED_LED;  // Red off
 P1OUT ^= GREEN_LED;
 _delay_cycles(220000);
