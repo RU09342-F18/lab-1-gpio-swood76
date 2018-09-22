@@ -1,6 +1,5 @@
 # Off Board Blink
-This repository includes documetation of the impelmentation of the MSP430G2553 20 pin chip on a breadboard to blink 2 red LEDS with reset functionality. As a result, the necessary source file (main.c) specific to the MSP430G2553. Essentially, the code programmed to the chip is identical to the multiple blink code, simply enhanced with reset functionality. Also included in this repository is a detailed explanation of the reset circuit and proper electrical components, and power operations to ensure that the chip was not fried and proper blink and reset functionality was achieved.
-## "Circuit"
+This repository includes documetation of the impelmentation of the MSP430G2553 20 pin chip on a breadboard to blink 2 red LEDS with reset functionality. As a result, the necessary source file (main.c) specific to the MSP430G2553. Essentially, the code programmed to the chip is identical to the multiple blink code, simply enhanced with reset functionality. Also included in this repository is a detailed explanation of the reset circuit with both video and picture, proper electrical components, and power operations to ensure that the chip was not fried and proper blink and reset functionality was achieved.
 
 
 
@@ -9,4 +8,5 @@ This repository includes documetation of the impelmentation of the MSP430G2553 2
 
 
 ## "Power Supply and Electronic Components required?"
-You remember those parts bins in the back of the teaching labs? They contain most everything you will need to do this portion of the lab. You should really make a effort to try and replicate what is on those development boards on the breadboard so you can begin to see what is needed to design with a microcontroller. Mess around with different color LEDS and see if they behave the same as the simple Red LEDs.
+Due to the possibility of easily frying the 20 pin chip, proper precaution was followed in buildig the circuit which is listed in its folder with a image illustrating its set up, and video which verifies its multiple blink and reset functionality. To accomplish this wires were drawn from the 3V power supply pins on the G2553 launch pad.
+ 
