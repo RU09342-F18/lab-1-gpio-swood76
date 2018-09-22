@@ -25,7 +25,9 @@ void main(void)
 
 int i,j; // initialization of variables which are responsible for the delay
 
-WDTCTL = WDTPW + WDTHOLD;
+WDTCTL = WDTPW + WDTHOLD; // Disable watchdog timer, watch dog timer prevents code from getting stuck in an infinite loop
+                           // Since getting stuck in an infinite loop is not a concern for this application, it is disabled to prevent
+                           // the device from resetting 
 
 P1DIR |= (LED1|LED2); // Since on the MSP430G2553, LED1 and LED2 are both within port 1, both can be enabled as outputs within the same line
 
@@ -33,25 +35,33 @@ i=j=0;
 
 for(;;)
 
-{ // increment both counter
+{ // increase the initialized counter variables i, and j
 
   i++;
 
   j++;
 
-// check first counter, if end value reset and toggle led
+  
+// increases both variables such that they count until their condition is met
+// prior to condition being met, if incremented variable is greater than the defined constant counter
+// both if statements execute toggleable LEDS and loop indefinitely on and off due to being within nested,
+// indefinite, For loop
+
+
 
   if (i>CTR1)
 
       { i=0; P1OUT^=LED1;}
 
-// check 2nd counter, if end value reset and toggle led
+
   if (j>CTR2)
+  
+  // Setting both i and j to zero essentially resets the counter variables once the condition is met and they have counted well
+  // above the defined CTR1 and CTR2 values; For example, both i and j are incremented, icondition is met; (i is incremented to such
+  // a value that i is greater than 3000, i is reset, and the LED is toggled by using the bitwise XOR operation
 
      { j=0; P1OUT^=LED2;}
 
-} // forever
-
-// End main
-
+} 
+// void, loops indefinitely
 }
