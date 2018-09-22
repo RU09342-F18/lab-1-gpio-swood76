@@ -3,6 +3,9 @@
 //***************************************************************************************
 //#include <msp430g2231.h>
 
+/*
+Detailed explanation of each line of code written below program
+*/
 
 
 #include <msp430.h>
