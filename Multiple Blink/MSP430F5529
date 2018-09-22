@@ -1,8 +1,8 @@
 #include <msp430.h>
-// Blink time constants
 
-#define CTR1 3000                                       //define counter1 (CTR1) a value significantly less than counter2 (CTR2)
-                                                        // for distinct delay between the red and green LEDs
+
+#define CTR1 3000                                       //define counter1 (CTR1) a constant value significantly less than counter2 (CTR2)
+                                                        // for distinct delay between the red and green LEDs; creates distinct blink
 
 #define CTR2 30000
 
@@ -13,7 +13,7 @@
 #define LED2 BIT6
 
 
-
+// return nothing
 void main(void)
 
 {
@@ -56,9 +56,9 @@ for(;;)
 
      { j=0; P1OUT^=LED2;}
 
-} // forever
+} 
 
-// End main
+
 
 }
 
