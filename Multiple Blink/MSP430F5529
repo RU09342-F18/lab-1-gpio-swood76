@@ -47,19 +47,21 @@ for(;;)
 
   j++;
 
-// check first counter, if end value reset and toggle led
+ // Setting both i and j to zero essentially resets the counter variables once the condition is met and they have counted well
+  // above the defined CTR1 and CTR2 values; For example, both i and j are incremented, icondition is met; (j is incremented to such
+  // a value that j is greater than 30,000, j is reset, and the LED2 is toggled using the bitwise XOR operation
 
   if (i>CTR1)
 
       { i=0; P1OUT^=LED1;}
 
-// check 2nd counter, if end value reset and toggle led
+
   if (j>CTR2)
 
      { j=0; P4OUT^=LED2;}
 
 } 
-
+//indefinite loop, repeats
 
 
 }
