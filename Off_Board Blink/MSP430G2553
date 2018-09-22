@@ -3,14 +3,16 @@
 
 
 // Blink time constants
-
-#define CTR1 3000
-
+                                                         
+#define CTR1 3000                                                    //define counter1 (CTR1) a constant value significantly less than counter2 (CTR2)
+                                                                    // for distinct delay between the red and green LEDs; creates distinct blink,
+                                                                    // red LED blinks faster
 #define CTR2 3000
 
 // led bit assignment
 
-#define LED1 BIT0
+#define LED1 BIT0                                       // corresponds to the zeroth bit of port1, P1.0, red LED defined constant as LED1
+                                                        // for easier reference through program; green LED2 defined as BIT6, P1.6
 
 #define LED2 BIT6
 
@@ -20,7 +22,7 @@ void main(void)
 
 {
 
-int i,j;
+int i,j;  // initialization of variables which are responsible for the delay 
 
 WDTCTL = WDTPW + WDTHOLD;
 
@@ -35,6 +37,11 @@ for(;;)
   i++;
 
   j++;
+  
+  // increases both variables such that they count until their condition is met
+// prior to condition being met, if incremented variable is greater than the defined constant counter
+// both if statements execute toggleable LEDS and loop indefinitely on and off due to being within nested,
+// indefinite, For loop
 
 // check first counter, if end value reset and toggle led
 
@@ -46,10 +53,13 @@ for(;;)
   if (j>CTR2)
 
      { j=0; P1OUT^=LED2;}
+     
+     
+      // Setting both i and j to zero essentially resets the counter variables once the condition is met and they have counted well
+  // above the defined CTR1 and CTR2 values; For example, both i and j are incremented, icondition is met; (i is incremented to such
+  // a value that i is greater than 3000, i is reset, and the LED is toggled by using the bitwise XOR operation
 
-} // forever
-
-// End main
+} 
 
 }
 
