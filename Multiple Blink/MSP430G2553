@@ -4,7 +4,7 @@
 
 // Blink time constants                                 //define counter1 (CTR1) a constant value significantly less than counter2 (CTR2)
                                                         // for distinct delay between the red and green LEDs; creates distinct blink,
-                                                        // red LED blinks signficiantly faster
+                                                        // red LED blinks faster
 
 
 #define CTR1 3000
@@ -12,8 +12,8 @@
 #define CTR2 5000
 
 // led bit assignment
-
-#define LED1 BIT0
+#define LED1 BIT0                                          // corresponds to the zeroth bit of port1, P1.0, red LED defined constant as LED1
+                                                            // for easier reference through program; green LED2 defined as BIT6, P1.6
 
 #define LED2 BIT6
 
