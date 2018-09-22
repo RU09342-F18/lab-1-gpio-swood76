@@ -8,7 +8,8 @@
  * This code demonstrates the simple blink on the MSP432P401R
  * main.c
  */
-volatile unsigned int i = 0;            // Volatile to prevent optimization. This keeps count of cycles between LED toggles
+volatile unsigned int i = 0;            // variable which acts as counter between LED toggles defined as voltile
+                                        // to prevent compiler wanting to optimize code and possibly not go through indefnite for loop
 void main(void)
 {
     WDTCTL = WDTPW + WDTHOLD;               // Stop watchdog timer. This line of code is needed at the beginning of most MSP430 projects.
