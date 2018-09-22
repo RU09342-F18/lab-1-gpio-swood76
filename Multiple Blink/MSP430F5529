@@ -1,13 +1,14 @@
 #include <msp430.h>
 // Blink time constants
 
-#define CTR1 3000
+#define CTR1 3000                                       //define counter1 (CTR1) a value significantly less than counter2 (CTR2)
+                                                        // for distinct delay between the red and green LEDs
 
 #define CTR2 30000
 
 // led bit assignment
 
-#define LED1 BIT0
+#define LED1 BIT0                                  // define BIT0 or 0x01 as BIT0 (Port 1, Pin 0 (P1.0)) and 0x70 as BIT 6 (P4.7)
 
 #define LED2 BIT6
 
@@ -24,19 +25,23 @@ void main(void)
     //P1OUT ^= LED1;
 
 
-int i,j;
+int i,j; // initialization of variables which are responsible for the delay
 
-WDTCTL = WDTPW + WDTHOLD;
+WDTCTL = WDTPW + WDTHOLD; 
 
-P1DIR |= (LED1|LED2);
+P1DIR |= (LED1|LED2); // Set both LED1 and LED2 as outputs
 
 i=j=0;
 
 for(;;)
 
-{ // increment both counter
+{ 
 
-  i++;
+// increases both variables such that they count until their condition is met
+// prior to condition being met both if statements execute toggleable LEDS and loop indefinitely on and off due to being within nested,
+// indefinite, For loop
+
+  i++; 
 
   j++;
 
