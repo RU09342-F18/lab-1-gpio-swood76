@@ -2,10 +2,12 @@
 #define GREEN_LED BIT6 // Port 1.6
 int main(void)
 {
-  WDTCTL = WDTPW + WDTHOLD;                 // Stop watchdog timer
-  P1DIR |= 0x01;                            // Set P1.0 to output direction
-
-  for (;;)
+  WDTCTL = WDTPW + WDTHOLD;                 /*First line is meant to disable the watchdog timer, watchdog timer is a peripheral which helps
+  																						to prevent program from getting stuck in a place where it shouldn’t be;
+  P1DIR |= 0x01;                             for example, if the program got stuck in an infinite loop, which is very possible in c, 
+																							the watchdog timer monitors that a specific amount of time has passed; 
+  for (;;)                                    thus it resets the device, so that the device can function properly again, but since the scope of these programs is so simple one does not have to be concern of getting stuck in an infinite loop; therefore, the watchdog timer is disabled. 
+                                            */
   {
     volatile unsigned int i;
 
