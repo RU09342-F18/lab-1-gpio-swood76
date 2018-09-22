@@ -2,6 +2,8 @@
 This repository includes documetation of the impelmentation of the MSP430G2553 20 pin chip on a breadboard to blink 2 red LEDS with reset functionality. As a result, the necessary source file (main.c) specific to the MSP430G2553. Essentially, the code programmed to the chip is identical to the multiple blink code, simply enhanced with reset functionality. Also included in this repository is a detailed explanation of the reset circuit with both video and picture, proper electrical components, and power operations to ensure that the chip was not fried and proper blink and reset functionality was achieved.
 
 
+![off_board_blinkpic](https://user-images.githubusercontent.com/35699946/45919252-68d92800-be60-11e8-9ce9-e5060954dce8.jpeg)
+
 
 
 
