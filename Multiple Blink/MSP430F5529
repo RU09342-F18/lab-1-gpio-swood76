@@ -61,7 +61,7 @@ for(;;)
      { j=0; P4OUT^=LED2;}
 
 } 
-//indefinite loop, repeats
+//infinite loop, repeats
 
 
 }
