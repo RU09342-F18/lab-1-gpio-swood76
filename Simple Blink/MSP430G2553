@@ -2,12 +2,11 @@
 #define GREEN_LED BIT6 // Port 1.6
 int main(void)
 {
-  WDTCTL = WDTPW + WDTHOLD;                 /*First line is meant to disable the watchdog timer, watchdog timer is a peripheral which helps
-  																						to prevent program from getting stuck in a place where it shouldn’t be;
-  P1DIR |= 0x01;                             for example, if the program got stuck in an infinite loop, which is very possible in c, 
-																							the watchdog timer monitors that a specific amount of time has passed; 
-  for (;;)                                    thus it resets the device, so that the device can function properly again, but since the scope of these programs is so simple one does not have to be concern of getting stuck in an infinite loop; therefore, the watchdog timer is disabled. 
-                                            */
+  WDTCTL = WDTPW + WDTHOLD;               
+                                              */
+  P1DIR |= 0x01;                            // Set P1.0 to output direction
+
+  for (;;)
   {
     volatile unsigned int i;
 
@@ -22,4 +21,43 @@ int main(void)
 
   }
 }
+/* DETAILED EXPLANATION OF EACH LINE:
+First line is meant to disable the watchdog timer, watchdog timer is a peripheral which helps
+to prevent program from getting stuck in a place where it shouldn’t be;
+for example, if the program got stuck in an infinite loop, which is very possible in c, 
+ the watchdog timer monitors that a specific amount of time has passed; 
+  thus it resets the device, so that the device can function properly again,
+ but since the scope of these programs is so simple 
+ one does not have to be concern of getting stuck in an infinite loop;
+ therefore, the watchdog timer is disabled. 
 
+Next line is meant to configure the general-purpose input/out pin, this is accomplished by enabling the direction register of the port pin as an input or output.
+For example, the port pin P1’s direction register is enabled as an output by it setting equal to P1DIR 
+(eight-bit direction register) bitwise OR with 1, which can be seen in this line as P1DIR |= 0x01. 
+The zeroth bit of the eight-bit direction register is the bit desired since the red LED has the following respective port and pin value P1.0. 
+Since the port consists of eight bits, one for each pin, e.g. <PIN7><PIN6><PIN5><PIN4><PIN3><PIN2><PIN1><PIN0>, 
+P1DIR must be: 0000 0001 because the zeroth bit must be turned on high (on) to turn on the red led. 
+This is accomplished due to the fact that 0000 0001, or rather 0x01 is due to the bit mask properties. 
+In this case, 0x01 acts as the mask and the bitwise OR operator allows it so no matter what is in the P1DIR register 
+to begin with, it will either stay the same or be turned on. 
+For example, if there was a zero in the zeroth bit in the P1DIR register: 
+							0000 0000 (P1DIR register)      1111 1110
+							0000 0001 (the bit mask)          0000 0001
+							0000 0001                         1111 1111 
+(both cases the zeroth bit was turned on, so that the red LED would light and other bits
+which were true already were held true after operation was perform
+						
+Next to accomplish the actual blink effect of the bright red LED, another bitwise operation is done on another register, which is P1OUT,
+and can be alternated between states of on and off by simply using the exclusive OR operation over some delay, 
+this can again be proven by carrying out an operation, which proves that no matter the contents of the P1OUT register 
+the desired bit (pin) will be toggled on or off with either a zero or a one bit mask:
+							1010 1110 (P1OUT register)      1010 1110
+							0000 0001 (the bit mask)         0000 0000
+							1010 1111    (toggle on)         1010 1110 (toggle off)
+								
+								
+The LED is then delayed by the following Do While loop nested within the infinite loop, 
+which will loop 50,000 times before it is decreased by to 0, and the process is restarted since this loop is within the infinite loop, 
+and the LED is then turned off, and the blink effect is accomplished.
+
+*/
