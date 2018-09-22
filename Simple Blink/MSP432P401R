@@ -9,7 +9,7 @@
  * main.c
  */
 volatile unsigned int i = 0;            // variable which acts as counter between LED toggles defined as voltile
-                                        // to prevent compiler wanting to optimize code and possibly not go through infinite for loop
+                                        // to prevent compiler from wanting to optimize code and possibly not go through infinite for loop
                                         // and the toggled blink effect will never occur
 void main(void)
 {
