@@ -10,7 +10,7 @@
 
 #define LED1 BIT0                                  // define BIT0 or 0x01 as BIT0 (Port 1, Pin 0 (P1.0)) and 0x70 as BIT 6 (P4.7)
 
-#define LED2 BIT6
+#define LED2 BIT7
 
 
 // return nothing
@@ -29,7 +29,8 @@ int i,j; // initialization of variables which are responsible for the delay
 
 WDTCTL = WDTPW + WDTHOLD; 
 
-P1DIR |= (LED1|LED2); // Set both LED1 and LED2 as outputs
+P1DIR |= LED1;
+P4DIR |= LED2;
 
 i=j=0;
 
@@ -54,7 +55,7 @@ for(;;)
 // check 2nd counter, if end value reset and toggle led
   if (j>CTR2)
 
-     { j=0; P1OUT^=LED2;}
+     { j=0; P4OUT^=LED2;}
 
 } 
 
