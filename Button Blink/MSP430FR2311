@@ -17,9 +17,9 @@ int main(void)
     PM5CTL0 &= ~LOCKLPM5;                   // Disable the GPIO power-on default high-impedance mode
                                             // to activate previously configured port settings
 
-    P1DIR &= ~BIT1;               // P1.3 (SW2) -> Input
-      P1REN |= BIT1;              // P1.3 Pull Up/Down Enable
-      P1OUT |= BIT1;              // P1.3 Pull Up Enable
+    P1DIR &= ~BIT1;               // P1.1 (SW2) -> Input
+      P1REN |= BIT1;              // P1.1 Pull Up/Down Enable
+      P1OUT |= BIT1;              // P1.1 Pull Up Enable
 
       while(1)
       {
@@ -39,6 +39,53 @@ int main(void)
     */
 
 
+/*
+/* DETAILED EXPLANATION OF EACH LINE:
+First line is meant to disable the watchdog timer, watchdog timer is a peripheral which helps
+to prevent program from getting stuck in a place where it shouldn’t be;
+for example, if the program got stuck in an infinite loop, which is very possible in c,
+ the watchdog timer monitors that a specific amount of time has passed;
+  thus it resets the device, so that the device can function properly again,
+ but since the scope of these programs is so simple
+ one does not have to be concern of getting stuck in an infinite loop;
+ therefore, the watchdog timer is disabled.
 
+
+Next, to ensure that the bits stored in the P1OUT register are cleared the previous values
+are bitwised AND with the opposite of the desired cleared bit, the zeroth bit. e.g: 
+                                                                               0000 0000                 0000 0001   
+                                                                             & 0000 0001                 0000 0000
+                                                                               0000 0000                 0000 0000 
+                                                                               
+                                                            (both cases bit zero is cleared and state is defined as off)
+   
+   
+   
+   
+Next line is meant to configure the general-purpose input/out pin, this is accomplished by enabling the direction register of the port pin as an input or output.
+For example, the port pin P1’s direction register is enabled as an output by it setting equal to P1DIR
+(eight-bit direction register) bitwise OR with 1, which can be seen in this line as P1DIR |= 0x01, or rather in this example simple bit0.
+<PIN7><PIN6><PIN5><PIN4><PIN3><PIN2><PIN1><PIN0>
+
+
+
+                                                                            
+
+Next line "Disables the GPIO power-on default high-impedance mode to activate previously configured port settings (TI)", 
+this is due to the fact that LOCKLPM5 is set to enable a lock that is within the memory mapped output register
+
+To enable control from the user the P1DIR register is then enabled as an input such that pin 1, the button is specified as bit 1. 
+
+
+
+
+
+
+
+
+
+
+
+*/
 
 
