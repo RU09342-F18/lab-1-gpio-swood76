@@ -9,31 +9,29 @@
  * main.c
  */
 volatile unsigned int i = 0;            // variable which acts as counter between LED toggles defined as voltile
-                                        // to prevent compiler wanting to optimize code and possibly not go through indefnite for loop
+                                        // to prevent compiler wanting to optimize code and possibly not go through infinite for loop
+                                        // and the toggled blink effect will never occur
 void main(void)
 {
-    WDTCTL = WDTPW + WDTHOLD;               // Stop watchdog timer. This line of code is needed at the beginning of most MSP430 projects.
-                                            // This line of code turns off the watchdog timer, which can reset the device after a certain period of time.
-                                            // If you've a lot of initializations, this line prevents the system from falling into infinite loops.
+    WDTCTL = WDTPW + WDTHOLD;               //Disabled the watchdog timer, which acts as a safe guard from getting stuck in an infinite for loop 
 
-    P1DIR |= 00000001;                          // P1DIR is a register that configures the direction (DIR) of a port pin as an output or an input.
-                                            // To set a specific pin as output or input, we write a '1' or '0' on the appropriate bit of the register.
-                                            // P1DIR = <PIN7><PIN6><PIN5><PIN4><PIN3><PIN2><PIN1><PIN0>
-                                            // Since we want to blink the on-board red LED, we want to set the direction of Port 1, Pin 0 (P1.0) as an output
-                                            // We do that by writing a 1 on the PIN0 bit of the P1DIR register
-                                            // P1DIR = 00000001 <-- binary representation
-                                            // P1DIR = 0x01     <-- this is the hexadecimal conversion of 0000 0001
+    P1DIR |= 00000001;                       // Next line is meant to configure the general-purpose input/out pin, this is accomplished by enabling the direction register of the port pin as an input or output.
+                                            //For example, the port pin P1’s direction register is enabled as an output by it setting equal to P1DIR 
+                                           //  (eight-bit direction register) bitwise OR with 1,
+                                           // which can be seen in this line as hardcoding the bit mask to 0000 0001
 
-    for (;;)                                // This empty for-loop will cause the lines of code within to loop infinitely
+    for (;;)                                // For loop with no parameters allow for the contents to with to repeat infinitely
     {
         P1OUT ^= 0x01;
         // Toggle P1.0 using exclusive-OR operation (^=)
-                                            // P1OUT is another register which holds the status of the LED.
-                                            // '1' specifies that it's ON or HIGH, while '0' specifies that it's OFF or LOW
-                                            // Since our LED is tied to P1.0, we will toggle the 0 bit of the P1OUT register
+        
+        //Next to accomplish the actual blink effect of the bright red LED, 
+        //another bitwise operation is done on another register, which is P1OUT,
+        //and can be alternated between states of on and off by simply using the exclusive OR operation over some delay, with a respective
+        // '1' or '0'
 
-        for(i=0; i< 20000; i++);            // Delay between LED toggles. This for-loop will run until the condition is met.
-                                            //In this case, it will loop until the variable i increments to 20000.
+        for(i=0; i< 20000; i++);            // Counter which essentially create delay between the LED toggles created by the bit
+                                            // operation of P1OUT ^= 0x01
     }
 }
 
