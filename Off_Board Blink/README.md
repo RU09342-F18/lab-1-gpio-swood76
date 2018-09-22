@@ -16,4 +16,4 @@ Due to the possibility of easily frying the 20 pin chip, proper precaution was f
  
 
 
-![giphy](https://media.giphy.com/media/3JTq6E4b4vZyKDCsk1/giphy.mp4)
+![off_board_blink](https://media.giphy.com/media/3JTq6E4b4vZyKDCsk1/giphy.mp4)
