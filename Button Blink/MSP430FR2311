@@ -77,10 +77,16 @@ this is due to the fact that LOCKLPM5 is set to enable a lock that is within the
 To enable control from the user the P1DIR register is then enabled as an input such that pin 1, the button is specified as bit 1. 
 
 
+Next, the internal pull up/pull down resistor is enabled, described and illustrated in the datasheet for the msp430fr2311 
+P1REN is of four inputs to an AND gate
+another one of these four inputs is P1DIR, so if P1REN is not set high then the enabling of P1DIR as an output has no effect since it
+will output a zero due to the lowstate of P1REN and overall schematic design.
 
-
-
-
+Next, a control state is reached, a while loop, which loops indefinitely, and acts similar to for(;;).
+The contents within, which execute the functionality of the swithc are implemented using conditional statements. First, an if statement 
+checks if the button, Pin 1 is not pressed, or bit 1 is not high by performing bitwise AND operation with P1IN (register) and BIT1 , if this
+condition is met then the LED is turned off; otherwise the LED is left on by enabling it ON with bitwise OR operation. The loop then repeats
+and the switch functionality is accomplished
 
 
 
