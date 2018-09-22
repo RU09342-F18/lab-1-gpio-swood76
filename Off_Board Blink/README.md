@@ -4,6 +4,8 @@ This repository includes documetation of the impelmentation of the MSP430G2553 2
 
 ![off_board_blinkpic](https://user-images.githubusercontent.com/35699946/45919252-68d92800-be60-11e8-9ce9-e5060954dce8.jpeg)
 
+Figure 1: MSP430G2553 Implemented on breadboard with Proper Reset Circuitry
+
 
 
 
