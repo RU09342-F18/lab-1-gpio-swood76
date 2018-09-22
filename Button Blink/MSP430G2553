@@ -2,25 +2,34 @@
 
 #define TRUE 1==1
 
-#define BUTTON BIT3 // Port 1.3
-#define RED_LED BIT0 // Port 1.0
-#define GREEN_LED BIT6 // Port 1.6
+#define BUTTON BIT3 // Desired button to be used is listed as P1.3; and is of bit3 within the eight bit register port
+                      //; defined button as bit 3 of Port 1.3
+#define RED_LED BIT0   // Desired LED1 to be used is listed as P1.0; and is of bit0 within the eight bit register port;
+                          //defined button as bit0 ofPort 1.0
+#define GREEN_LED BIT6  // Desired LED2 to be used is listed as P1.6; and is of bit6 within the eight bit register port;
+                          //defined button as bit6 ofPort 1.
 
 void main (void) {
 
 // Watchdog setup
-WDTCTL = WDTPW + WDTHOLD; // stop using the watchdog
-
+WDTCTL = WDTPW + WDTHOLD; // Disabled watchdog timer to ensure that the device does not reset due to its property to reset when
+                          // an infinite loop is executed
 // LED initial setup
-P1DIR |= RED_LED + GREEN_LED;   // ENABLE GREEN AND RED LED
+P1DIR |= RED_LED + GREEN_LED;   // Configures the initialized constant LED1 and LED2 of the G2553, bit0 + bit6, as outputs
 
 // Button setup
-P1DIR &= ~BUTTON; // button is an input
-P1OUT |= BUTTON; // pull-up resistor
-P1REN |= BUTTON; // resistor enabled
+P1DIR &= ~BUTTON; //Configures the initialized constant BUTTON (BIT3) to an input
+P1OUT |= BUTTON; 
+P1REN |= BUTTON; // Want pull-up resistor to be enabled high since for ports required there is a switch (P1.3) which otherwise
+                  // is connected to ground, the above line P1OUT sets the bit and function of this resistor as either pull up or pull down
+                  // since the P1OUT register was was enabled as an output, or high, a logical 1 set the resistor as a pull up resistor
+                  // which is necessary to prevent damage since VCC will be set high and selected,
 
+
+// begin infinite loop
 while (TRUE) {
 
+// Since button is low and not pressed, the AND operation results in the 
 if (P1IN & BUTTON) {
 P1OUT &= ~GREEN_LED;
 _delay_cycles(220000);// Green off
